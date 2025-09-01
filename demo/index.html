@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>subtitle.js Demo</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; }
+    header { display: flex; justify-content: space-between; padding: 0.5rem 1rem; background: #333; color: white; }
+    main { display: flex; height: calc(100vh - 48px); }
+    section { flex: 1; padding: 1rem; overflow: auto; }
+    #input { border-right: 1px solid #ccc; }
+    #drop-zone { border: 2px dashed #ccc; padding: 2rem; text-align: center; margin-bottom: 1rem; }
+    #drop-zone.drag { background: #eef; }
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 0.5rem; }
+    #settings { position: fixed; top: 10%; right: 10%; background: white; border: 1px solid #ccc; padding: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+    #settings.hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>subtitle.js Demo</h1>
+    <button id="open-settings">Settings</button>
+  </header>
+
+  <div id="settings" class="hidden">
+    <h2>Settings</h2>
+    <fieldset>
+      <legend>Output formats</legend>
+      <label><input type="checkbox" id="fmt-txt" checked /> TXT (dialogue)</label><br />
+      <label><input type="checkbox" id="fmt-srt" /> Clean SRT</label><br />
+      <label><input type="checkbox" id="fmt-vtt" /> WebVTT</label><br />
+      <label><input type="checkbox" id="fmt-json" /> JSON</label>
+    </fieldset>
+    <fieldset>
+      <legend>Tag handling</legend>
+      <label><input type="checkbox" id="remove-tags" checked /> Remove HTML-like tags</label>
+    </fieldset>
+    <fieldset>
+      <legend>Line joining (dialogue)</legend>
+      <select id="line-join">
+        <option value="keep">Keep line breaks</option>
+        <option value="cue">Join lines per cue</option>
+        <option value="all">Join all</option>
+      </select>
+    </fieldset>
+    <button id="close-settings">Close</button>
+  </div>
+
+  <main>
+    <section id="input">
+      <div id="drop-zone">Drop SRT files here or <input type="file" id="file-input" multiple accept=".srt" /></div>
+      <ul id="file-list"></ul>
+    </section>
+    <section id="output">
+      <button id="download-all" disabled>Download All</button>
+      <ul id="output-list"></ul>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script type="module" src="./demo.js"></script>
+</body>
+</html>
